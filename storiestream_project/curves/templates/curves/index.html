@@ -354,28 +354,28 @@
     /////////////////////////////////
 
 
-    function MouseWheelHandler(e) {
-
-        // cross-browser wheel delta
-        let e = window.event || e; // old IE support
-        let delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
-
-        ////////////
-        let current_t = 0;
-
-
-
-        let container_px = gc.invertX(segments[segment_index].getX(t - dt));
-        let container_py = gc.invertY(segments[segment_index].getY(t - dt));
-        let container_px2 = gc.invertX(segments[segment_index].getX(t + dt));
-        let container_py2 = gc.invertY(segments[segment_index].getY(t + dt));
-        let container_angle = Math.atan2(py2 - py, px2 - px) - Math.PI / 2;
-
-    }
+    // function MouseWheelHandler(e) {
+    //
+    //     // cross-browser wheel delta
+    //     let e = window.event || e; // old IE support
+    //     let delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+    //
+    //     ////////////
+    //     let current_t = 0;
+    //
+    //
+    //
+    //     let container_px = gc.invertX(segments[segment_index].getX(t - dt));
+    //     let container_py = gc.invertY(segments[segment_index].getY(t - dt));
+    //     let container_px2 = gc.invertX(segments[segment_index].getX(t + dt));
+    //     let container_py2 = gc.invertY(segments[segment_index].getY(t + dt));
+    //     let container_angle = Math.atan2(py2 - py, px2 - px) - Math.PI / 2;
+    //
+    // }
 
     let current_t = 0.0;
     window.onwheel = function (evt) {
-        current_t += 0.001*evt.deltaY;
+        current_t += 0.0001*evt.deltaY;
         if (current_t < 0) {
             current_t = 0;
         } else if (current_t > 1.0) {
