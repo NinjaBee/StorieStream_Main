@@ -3,5 +3,5 @@ from . import views
 
 app_name = 'curves'
 urlpatterns = [
-    path('', views.index, name='index')
+    path('./templates/', views.index, name='index')
 ]
