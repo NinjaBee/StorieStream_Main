@@ -230,8 +230,14 @@
             // Calling split text function to get our lines.
             let lines = splitText(text, width);
 
+            //lines = lines.splice(0, 80);
+
+            let text_scale_factor = 0.1;
+
+
+
             // Creating a new global coordinate called gc.
-            let gc = new GlobalCoordinates(400, 400, 30);
+            let gc = new GlobalCoordinates(400, 400, lines.length*text_scale_factor);
 
             // Making the global coordinate (gc) accessible
             this.gc = gc;
@@ -258,6 +264,8 @@
                         gc.center_x = gc.transformX(end_x);
                         gc.center_y = gc.transformY(end_y);
                         segment_index += 1;
+
+
                     }
                     // let x = starting_point.x + this.segments[i].getX(t);
                     // let y = starting_point.y + this.segments[i].getY(t);
@@ -288,6 +296,8 @@
                 div.style.top = gc.transformY(segments[segment_index].getY(t)) + 'px';
                 // Rotating div according to the current angle we want
                 div.style.transform = 'rotate(' + angle + 'rad)';
+                //div.style.transform +=  'scale(0.5)';
+
                 // Fill div with enough words for one line.
                 div.innerText = lines[i];
                 // Might be pointless to have line_height
@@ -300,7 +310,7 @@
 
 
             }
-            this.gc = new GlobalCoordinates(400, 400, 30);  ///////// hashed together recall of this.gc
+            this.gc = new GlobalCoordinates(400, 400, lines.length*text_scale_factor);  ///////// hashed together recall of this.gc
 
         }
 
@@ -310,6 +320,10 @@
             // these are some magic numbers.
             let starting_point = new Point(0, 0);
             for (let i = 0; i < this.segments.length; ++i) {
+
+                //starting_point.x += this.segments[i].xt(0.0);
+                //starting_point.y += this.segments[i].yt(0.0);
+
                 if (t >= this.segments[i].min_t && t <= this.segments[i].max_t) {
                     // getX and getY is from our segments
 
@@ -319,6 +333,9 @@
                 }
                 starting_point.x += this.segments[i].xt(1.0);
                 starting_point.y += this.segments[i].yt(1.0);
+
+
+
                 //console.log(starting_point);
             }
             return this.gc.transform(starting_point);
@@ -392,8 +409,7 @@
     let line_height = 30;
     let container = document.querySelector('#container'); // This is the div we automatically populate that you can see in the html. We create more than one of these.
 
-
-    text_path = new TextPath(text, container);
+    let text_path = new TextPath(text, container);
 
 
     // function findSegment(t) {
@@ -432,7 +448,8 @@
 
     let current_t = 0.0;
     window.onwheel = function (evt) {
-        current_t += 0.0001*evt.deltaY;
+        //current_t += 0.0001*evt.deltaY;
+        current_t += text_path.gc.scale*evt.deltaY/100000;
         if (current_t < 0) {
             current_t = 0;
         } else if (current_t > 1.0) {
@@ -446,7 +463,7 @@
 
         evt.preventDefault();
         return false;
-    }
+    };
 
     function changeOrientation(event) {
     alert("Rotate");
