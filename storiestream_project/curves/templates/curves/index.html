@@ -84,9 +84,9 @@
 
     // Segments are chunks of text in multiple divs that are curved (or not) according to mathematical equations.
     class Segment {
-        constructor(min_t, max_t, xt, yt) {
-            this.min_t = min_t;
-            this.max_t = max_t;
+        constructor(xt, yt) {
+            this.min_t = 0; // to be set by TextPath.calculateTRanges
+            this.max_t = 1;
             this.xt = xt;
             this.yt = yt;
         }
@@ -100,10 +100,33 @@
             t = (t - this.min_t) / (this.max_t - this.min_t);
             return this.yt(t);
         }
+        getDistance() {
+            // take 1000 steps from t=0 to t=1, sum up distances
+            let n_samples = 1000;
+            let distance = 0;
+            let length = 0;
+            for(let i=0; i < n_samples; ++i) {
+                // find the point at t0
+                let t0 = i/n_samples;
+                // find the point at t1
+                let t1 = (i+1)/n_samples;
+                let delta_x = (this.xt(t1) - this.xt(t0));
+                let delta_y = (this.yt(t1) - this.yt(t0));
+                // calculate the distance
+                distance += Math.sqrt(Math.pow(delta_x, 2) + Math.pow(delta_y, 2));
+                // add that distance to a running sum
+                length += distance;
+
+            }
+            return distance;
+
+
+        }
     }
 
 
     class GlobalCoordinates {
+        // Need to define scale
         constructor(center_x, center_y, scale) {
             this.center_x = center_x;
             this.center_y = center_y;
@@ -146,6 +169,7 @@
             return '(' + this.x + ', ' + this.y + ')';
         }
     }
+    //May not need segment points.
     class segmentPoint extends Point {
         constructor(x, y, segment_t) {
             super(x, y);
@@ -159,33 +183,33 @@
             // The three hard coded segments. Segment length is currently arbitrary, but linked. End of one is the beginning of the next:
 
             // Segment is starting at t of 0 and going until 0.2
-            let segment1 = new Segment(0, 0.2, function (t) {
+            let segment1 = new Segment(function (t) {
                 return 0.0;
             }, function (t) {
                 return 100 * t;
             });
 
             // Segment is starting at t of 0.2 and going until 0.8
-            let segment2 = new Segment(0.2, 0.5, function (t) {
+            let segment2 = new Segment(function (t) {
                 return 100 - 100 * Math.cos(t * Math.PI / 2);
             }, function (t) {
                 return 100 * Math.sin(t * Math.PI / 2);
             });
 
             // Segment is starting at t of 0.8 and going until 1.0
-            let segment3 = new Segment(0.5, 0.7, function (t) {
+            let segment3 = new Segment(function (t) {
                 return 100 * t;
             }, function (t) {
                 return 0.0;
             });
 
-            let segment4 = new Segment(0.7, 0.8, function (t) {
+            let segment4 = new Segment(function (t) {
                 return 0.0;
             }, function (t) {
                 return 100 * t;
             });
 
-            let segment5 = new Segment(0.8, 1.0, function (t) {
+            let segment5 = new Segment(function (t) {
                 return 100 - 100 * Math.sin(t * Math.PI / 2);
             }, function (t) {
                 return 100 * Math.sin(t * Math.PI / 2);
@@ -193,6 +217,13 @@
 
             // Hard coding an array of segments. Once again, this will need to change.
             this.segments = [segment1, segment2, segment3, segment4, segment5];
+
+            this.calculateTRanges();
+
+            console.log(this.segments);
+
+
+
             // simplifying segments for reference.
             let segments = this.segments;
 
@@ -291,6 +322,32 @@
                 //console.log(starting_point);
             }
             return this.gc.transform(starting_point);
+        }
+
+        calculateTRanges() {
+            // loop over segments, find their distances
+            let sum = 0;
+            let segment_distances = [];
+            for (let i=0; i<this.segments.length; ++i) {
+                let segment = this.segments[i];
+
+                // calculate length
+                let distance = this.segments[i].getDistance();
+                // put length in array
+                segment_distances.push(distance);
+                // add length to running sum
+                sum += distance;
+            }
+            // loop over segments again
+            let running_t = 0;
+            for (let i=0; i<this.segments.length; ++i) {
+                 // divide the segment length by the total length (sum)
+                let t_length = segment_distances[i]/sum;
+                // set the segment's t range
+                this.segments[i].min_t = running_t;
+                this.segments[i].max_t = running_t + t_length;
+                running_t += t_length;
+            }
         }
     }
 
