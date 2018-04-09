@@ -1,4 +1,4 @@
-from django.urls import url
+from django.urls import path, url
 from . import views
 
 app_name = 'edits'
