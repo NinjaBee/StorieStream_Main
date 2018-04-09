@@ -31,6 +31,11 @@ ALLOWED_HOSTS = [
 
 ]
 
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+MEDIA_ROOT = os.path.join(CURRENT_DIR, 'media')
+MEDIA_URL = '/media/'
+STATIC_URL = '/static/'
+
 
 # Application definition
 
@@ -62,7 +67,7 @@ ROOT_URLCONF = 'storiestream_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

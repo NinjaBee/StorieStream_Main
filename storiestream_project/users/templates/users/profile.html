@@ -1,0 +1,21 @@
+{{% extends base.html %}}
+
+
+
+<h2>{{ user.get_full_name }}</h2>
+<ul>
+  <li>Username: {{ user.username }}</li>
+  <li>Full name: {{ user.profile.first_name }} {{ user.profile.last_name }}</li>
+  <li>Location: {{ user.profile.location }}</li>
+    <li> <blockquote> Bio: {{ user.profile.bio }} </blockquote> </li>
+
+</ul>
+
+
+
+<form method="post">
+  {% csrf_token %}
+  {{ user_form.as_p }}
+  {{ profile_form.as_p }}
+  <button type="submit">Save changes</button>
+</form>
