@@ -34,14 +34,15 @@
             border-left: 5px solid brown;
             border-right: 5px solid brown;
 
-
             /*overflow: hidden;*/
         }
+
         #container > div:first-child {
             border-top: 3px solid brown;
 
         }
-        #container> div:last-child {
+
+        #container > div:last-child {
             border-bottom: 3px solid brown;
         }
 
@@ -50,8 +51,8 @@
         }
 
         #container > div:nth-child(even) {
-          background-color: floralwhite;
-}
+            background-color: floralwhite;
+        }
 
     </style>
 </head>
@@ -90,6 +91,7 @@
             this.xt = xt;
             this.yt = yt;
         }
+
         // We use this later when styling/twisitng our divs. getX and getY are made essentially the same way.
         getX(t) {
             t = (t - this.min_t) / (this.max_t - this.min_t);
@@ -100,16 +102,17 @@
             t = (t - this.min_t) / (this.max_t - this.min_t);
             return this.yt(t);
         }
+
         getDistance() {
             // take 1000 steps from t=0 to t=1, sum up distances
             let n_samples = 1000;
             let distance = 0;
             let length = 0;
-            for(let i=0; i < n_samples; ++i) {
+            for (let i = 0; i < n_samples; ++i) {
                 // find the point at t0
-                let t0 = i/n_samples;
+                let t0 = i / n_samples;
                 // find the point at t1
-                let t1 = (i+1)/n_samples;
+                let t1 = (i + 1) / n_samples;
                 let delta_x = (this.xt(t1) - this.xt(t0));
                 let delta_y = (this.yt(t1) - this.yt(t0));
                 // calculate the distance
@@ -124,120 +127,75 @@
         }
     }
 
-    // Segments are chunks of text in multiple divs that are curved (or not) according to mathematical equations.
-class Segment {
-    constructor(xt, yt) {
-        this.min_t = 0; // to be set by TextPath.calculateTRanges
-        this.max_t = 1;
-        this.xt = xt;
-        this.yt = yt;
-    }
-    // We use this later when styling/twisitng our divs. getX and getY are made essentially the same way.
-    getX(t) {
-        t = (t - this.min_t) / (this.max_t - this.min_t);
-        return this.xt(t);
-    }
-
-    getY(t) {
-        t = (t - this.min_t) / (this.max_t - this.min_t);
-        return this.yt(t);
-    }
-    getDistance() {
-        // take 1000 steps from t=0 to t=1, sum up distances
-        let n_samples = 1000;
-        let distance = 0;
-        let length = 0;
-        for(let i=0; i < n_samples; ++i) {
-            // find the point at t0
-            let t0 = i/n_samples;
-            // find the point at t1
-            let t1 = (i+1)/n_samples;
-            let delta_x = (this.xt(t1) - this.xt(t0));
-            let delta_y = (this.yt(t1) - this.yt(t0));
-            // calculate the distance
-            distance += Math.sqrt(Math.pow(delta_x, 2) + Math.pow(delta_y, 2));
-            // add that distance to a running sum
-            length += distance;
-
-        }
-        return distance;
-
-
-    }
-}
-
-class StraightSegment extends Segment {
-    constructor(angle, scale) {
-        super(function(t) {
-            return scale*Math.cos(angle)*t;
-        }, function(t) {
-            return scale*Math.sin(angle)*t;
-        });
-    }
-}
-
-class SinSegment extends Segment {
-    constructor() {
-        super(function(t) {
-            return t;
-        }, function(t) {
-            return Math.sin(t);
-        })
-    }
-}
-
-class ArcSegment extends Segment {
-    constructor() {
-        super(function(t) {
-            return 100 - 100 * Math.cos(t * Math.PI);
-        }, function(t) {
-            return 100 * Math.sin(t * Math.PI);
-        })
-    }
-}
-
-class CurvedSegment extends Segment {
-    constructor (radius, curve) {
-        super(null, null);
-        if (curve === CurvedSegment.UpperLeft) {
-            this.xt = function (t) {
-            return radius * (1 - Math.sin((t * Math.PI)/2) - 1);
-            };
-            this.yt = function(t) {
-            return radius * (Math.cos((t * Math.PI)/2) - 1);
-            };
-        } else if (curve === CurvedSegment.UpperRight) {
-            this.xt = function (t) {
-                return radius * (Math.sin((t * Math.PI)/2));
-            };
-            this.yt = function (t) {
-                return radius * (1 - Math.cos((t * Math.PI)/2) - 1);
-            }
-        } else if (curve === CurvedSegment.LowerLeft) {
-            this.xt = function (t) {
-                return radius * (1 - Math.sin((t * Math.PI)/2));
-            };
-            this.yt = function (t) {
-                return radius * (1 - Math.cos((t * Math.PI)/2) - 1);
-            }
-        } else if (curve === CurvedSegment.LowerRight) {
-           this.xt = function (t) {
-                return radius * (Math.sin((t * Math.PI)/2) - 1);
-           };
-           this.yt = function (t) {
-                return radius * (1 - Math.cos((t * Math.PI)/2) - 1);
-           }
+    class StraightSegment extends Segment {
+        constructor(angle, scale) {
+            super(function (t) {
+                return scale * Math.cos(angle) * t;
+            }, function (t) {
+                return scale * Math.sin(angle) * t;
+            });
         }
     }
-}
-CurvedSegment.UpperLeft = 0;
-CurvedSegment.UpperRight = 1;
-CurvedSegment.LowerLeft = 2;
-CurvedSegment.LowerRight = 3;
 
-let curved_segment = new CurvedSegment(500, CurvedSegment.UpperLeft);
+    class SinSegment extends Segment {
+        constructor() {
+            super(function (t) {
+                return t;
+            }, function (t) {
+                return Math.sin(t);
+            })
+        }
+    }
 
+    class ArcSegment extends Segment {
+        constructor(radius) {
+            super(function (t) {
+                return radius(100 - 100 * Math.cos(t * Math.PI));
+            }, function (t) {
+                return radius(100 * Math.sin(t * Math.PI));
+            })
+        }
+    }
 
+    class CurvedSegment extends Segment {
+        constructor(radius, curve) {
+            super(null, null);
+            if (curve === CurvedSegment.UpperLeft) {
+                this.xt = function (t) {
+                    return radius * (1 - Math.sin((t * Math.PI) / 2) - 1);
+                };
+                this.yt = function (t) {
+                    return radius * (Math.cos((t * Math.PI) / 2) - 1);
+                };
+            } else if (curve === CurvedSegment.UpperRight) {
+                this.xt = function (t) {
+                    return radius * (Math.sin((t * Math.PI) / 2));
+                };
+                this.yt = function (t) {
+                    return radius * (1 - Math.cos((t * Math.PI) / 2) - 1);
+                }
+            } else if (curve === CurvedSegment.LowerLeft) {
+                this.xt = function (t) {
+                    return radius * (1 - Math.sin((t * Math.PI) / 2));
+                };
+                this.yt = function (t) {
+                    return radius * (1 - Math.cos((t * Math.PI) / 2) - 1);
+                }
+            } else if (curve === CurvedSegment.LowerRight) {
+                this.xt = function (t) {
+                    return radius * (Math.sin((t * Math.PI) / 2) );
+                };
+                this.yt = function (t) {
+                    return radius * (1 - Math.cos((t * Math.PI) / 2) );
+                }
+            }
+        }
+    }
+
+    CurvedSegment.UpperLeft = 0;
+    CurvedSegment.UpperRight = 1;
+    CurvedSegment.LowerLeft = 2;
+    CurvedSegment.LowerRight = 3;
 
 
     class GlobalCoordinates {
@@ -263,27 +221,31 @@ let curved_segment = new CurvedSegment(500, CurvedSegment.UpperLeft);
         invertY(y) {
             return y / this.scale - this.center_y;
         }
+
         transform(p) {
             return new Point(this.center_x + this.scale * p.x,
-                            this.center_y + this.scale * p.y);
+                this.center_y + this.scale * p.y);
         }
+
         invert(p) {
             return new Point(p.x / this.scale - this.center_x,
-                                p.y / this.scale - this.center_y);
+                p.y / this.scale - this.center_y);
         }
     }
 
 
-   // Making a class for point
+    // Making a class for point
     class Point {
-        constructor(x=0, y=0) {
+        constructor(x = 0, y = 0) {
             this.x = x;
             this.y = y;
-         }
+        }
+
         toString() {
             return '(' + this.x + ', ' + this.y + ')';
         }
     }
+
     //May not need segment points.
     class segmentPoint extends Point {
         constructor(x, y, segment_t) {
@@ -292,67 +254,23 @@ let curved_segment = new CurvedSegment(500, CurvedSegment.UpperLeft);
         }
     }
 
-   // Text path is the twisting-turning text segment constructor.  Currently we have three segments hard coded in. This will need to change.
+
+    // Text path is the twisting-turning text segment constructor.  Currently we have three segments hard coded in. This will need to change.
     class TextPath {
-        constructor(text, container) {
-            // The three hard coded segments. Segment length is currently arbitrary, but linked. End of one is the beginning of the next:
+        constructor(text, container, segments) {
+            // simplifying segments_array into segments for reference.
 
-            // Segment is starting at t of 0 and going until 0.2
-            let segment1 = new Segment(function (t) {
-                return 0.0;
-            }, function (t) {
-                return 100 * t;
-            });
-
-            // Segment is starting at t of 0.2 and going until 0.8
-            let segment2 = new Segment(function (t) {
-                return 100 - 100 * Math.cos(t * Math.PI / 2);
-            }, function (t) {
-                return 100 * Math.sin(t * Math.PI / 2);
-            });
-
-            // Segment is starting at t of 0.8 and going until 1.0
-            let segment3 = new Segment(function (t) {
-                return 100 * t;
-            }, function (t) {
-                return 0.0;
-            });
-
-            let segment4 = new Segment(function (t) {
-                return 0.0;
-            }, function (t) {
-                return 100 * t;
-            });
-
-            let segment5 = new Segment(function (t) {
-                return 100 - 100 * Math.cos(t * Math.PI / 2);
-            }, function (t) {
-                return 100 * Math.cos(t * Math.PI / 2);
-            });
-
-            // Hard coding an array of segments. Once again, this will need to change.
-            this.segments = [segment1, segment2, segment3, segment4, segment5];
-
+            this.segments = segments;
             this.calculateTRanges();
-
-            console.log(this.segments);
-
-
-
-            // simplifying segments for reference.
-            let segments = this.segments;
 
             // Calling split text function to get our lines.
             let lines = splitText(text, width);
 
             //lines = lines.splice(0, 80);
-
             let text_scale_factor = 0.1;
 
-
-
             // Creating a new global coordinate called gc.
-            let gc = new GlobalCoordinates(400, 400, lines.length*text_scale_factor);
+            let gc = new GlobalCoordinates(400, 400, lines.length * text_scale_factor);
 
             // Making the global coordinate (gc) accessible
             this.gc = gc;
@@ -396,7 +314,7 @@ let curved_segment = new CurvedSegment(500, CurvedSegment.UpperLeft);
                 let dt = 0.01;
                 // 'point x equals' gc = global coordinates. getX and getY are from class Segment
                 let px = gc.transformX(segments[segment_index].getX(t));
-                // 'point y equals'
+                // 'point y equals...'
                 let py = gc.transformY(segments[segment_index].getY(t));
                 // second point of x
                 let px2 = gc.transformX(segments[segment_index].getX(t + dt));
@@ -422,10 +340,8 @@ let curved_segment = new CurvedSegment(500, CurvedSegment.UpperLeft);
                 // Add new div to our outter div "container"
                 container.appendChild(div);
 
-
-
             }
-            this.gc = new GlobalCoordinates(400, 400, lines.length*text_scale_factor);  ///////// hashed together recall of this.gc
+            this.gc = new GlobalCoordinates(400, 400, lines.length * text_scale_factor);  ///////// hashed together recall of this.gc
 
         }
 
@@ -450,7 +366,6 @@ let curved_segment = new CurvedSegment(500, CurvedSegment.UpperLeft);
                 starting_point.y += this.segments[i].yt(1.0);
 
 
-
                 //console.log(starting_point);
             }
             return this.gc.transform(starting_point);
@@ -460,7 +375,7 @@ let curved_segment = new CurvedSegment(500, CurvedSegment.UpperLeft);
             // loop over segments, find their distances
             let sum = 0;
             let segment_distances = [];
-            for (let i=0; i<this.segments.length; ++i) {
+            for (let i = 0; i < this.segments.length; ++i) {
                 let segment = this.segments[i];
 
                 // calculate length
@@ -472,9 +387,9 @@ let curved_segment = new CurvedSegment(500, CurvedSegment.UpperLeft);
             }
             // loop over segments again
             let running_t = 0;
-            for (let i=0; i<this.segments.length; ++i) {
-                 // divide the segment length by the total length (sum)
-                let t_length = segment_distances[i]/sum;
+            for (let i = 0; i < this.segments.length; ++i) {
+                // divide the segment length by the total length (sum)
+                let t_length = segment_distances[i] / sum;
                 // set the segment's t range
                 this.segments[i].min_t = running_t;
                 this.segments[i].max_t = running_t + t_length;
@@ -524,7 +439,13 @@ let curved_segment = new CurvedSegment(500, CurvedSegment.UpperLeft);
     let line_height = 30;
     let container = document.querySelector('#container'); // This is the div we automatically populate that you can see in the html. We create more than one of these.
 
-    let text_path = new TextPath(text, container);
+    let curved_segment = new CurvedSegment(500, CurvedSegment.UpperLeft);
+    let curved_segment2 = new CurvedSegment(300, CurvedSegment.LowerRight);
+    let straight_segment1 = new StraightSegment(Math.PI/4, 100);
+    let straight_segment2 = new StraightSegment(Math.PI/4, 100);
+    let segments = [straight_segment1, curved_segment, straight_segment2, curved_segment2];
+
+    let text_path = new TextPath(text, container, segments);
 
 
     // function findSegment(t) {
@@ -564,7 +485,7 @@ let curved_segment = new CurvedSegment(500, CurvedSegment.UpperLeft);
     let current_t = 0.0;
     window.onwheel = function (evt) {
         //current_t += 0.0001*evt.deltaY;
-        current_t += text_path.gc.scale*evt.deltaY/100000;
+        current_t += text_path.gc.scale * evt.deltaY / 100000;
         if (current_t < 0) {
             current_t = 0;
         } else if (current_t > 1.0) {
@@ -573,7 +494,7 @@ let curved_segment = new CurvedSegment(500, CurvedSegment.UpperLeft);
         let current_pt = text_path.getPoint(current_t);
         console.log(current_pt);
         //current_pt = text_path.gc.invert(current_pt);
-        container.style.transform = 'translate(' + (text_path.gc.center_x-current_pt.x) + 'px,' + (text_path.gc.center_y-current_pt.y) + 'px)';
+        container.style.transform = 'translate(' + (text_path.gc.center_x - current_pt.x) + 'px,' + (text_path.gc.center_y - current_pt.y) + 'px)';
         //container.style.transform = 'translate(' + current_pt.x + 'px,' + current_pt.y + 'px)';
 
         evt.preventDefault();
@@ -581,9 +502,9 @@ let curved_segment = new CurvedSegment(500, CurvedSegment.UpperLeft);
     };
 
     function changeOrientation(event) {
-    alert("Rotate");
-    event.preventDefault();
-}
+        alert("Rotate");
+        event.preventDefault();
+    }
 
 
     // Global Coordinate constructor for reference:

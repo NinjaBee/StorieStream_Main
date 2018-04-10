@@ -6,7 +6,7 @@ let text_path = new TextPath(text, container);
   let current_t = 0.0;
     window.onwheel = function (evt) {
         //current_t += 0.0001*evt.deltaY;
-        current_t += text_path.gc.scale*evt.deltaY/100000;
+        current_t += text_path.gc.scale*evt.deltaY/100000; // Need to make a scaling function connected to number of lines
         if (current_t < 0) {
             current_t = 0;
         } else if (current_t > 1.0) {
