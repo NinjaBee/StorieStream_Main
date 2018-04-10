@@ -82,26 +82,33 @@ WSGI_APPLICATION = 'storiestream_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-def get_env_variable(var_name):
-    try:
-        return os.environ[var_name]
-    except KeyError:
-        error_msg = "Set the %s environment variable" % var_name
-        raise ImproperlyConfigured(error_msg)
+# def get_env_variable(var_name):
+#     try:
+#         return os.environ[var_name]
+#     except KeyError:
+#         error_msg = "Set the %s environment variable" % var_name
+#         raise ImproperlyConfigured(error_msg)
+#
+# DATABASES = {
+#         'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': get_env_variable('storiestream_main_db'),
+#         'USER': get_env_variable('Admin'),
+#         'PASSWORD': get_env_variable('QnO2Robots!'),
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#         'OPTIONS': {
+#                 'isolation_level': psycopg2.extensions.ISOLATION_LEVEL_SERIALIZABLE,
+#         },
+#     }
+#
+# }
 
 DATABASES = {
-        'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': get_env_variable('storiestream_main_db'),
-        'USER': get_env_variable('Admin'),
-        'PASSWORD': get_env_variable('QnO2Robots!'),
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-        'OPTIONS': {
-                'isolation_level': psycopg2.extensions.ISOLATION_LEVEL_SERIALIZABLE,
-        },
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
-
 }
 
 

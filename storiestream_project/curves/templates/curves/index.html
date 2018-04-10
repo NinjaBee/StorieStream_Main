@@ -210,9 +210,9 @@
             });
 
             let segment5 = new Segment(function (t) {
-                return 100 - 100 * Math.sin(t * Math.PI / 2);
+                return 100 - 100 * Math.cos(t * Math.PI / 2);
             }, function (t) {
-                return 100 * Math.sin(t * Math.PI / 2);
+                return 100 * Math.cos(t * Math.PI / 2);
             });
 
             // Hard coding an array of segments. Once again, this will need to change.
