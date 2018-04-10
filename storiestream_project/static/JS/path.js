@@ -75,13 +75,32 @@ class CurvedSegment extends Segment {
         super(null, null);
         if (curve === CurvedSegment.UpperLeft) {
             this.xt = function (t) {
-
+            return radius * (1 - Math.sin((t * Math.PI)/2) - 1);
             };
             this.yt = function(t) {
-
+            return radius * (Math.cos((t * Math.PI)/2) - 1);
             };
-        } else if (curve == CurvedSegment.UpperRight) {
-
+        } else if (curve === CurvedSegment.UpperRight) {
+            this.xt = function (t) {
+                return radius * (Math.sin((t * Math.PI)/2));
+            };
+            this.yt = function (t) {
+                return radius * (1 - Math.cos((t * Math.PI)/2) - 1);
+            }
+        } else if (curve === CurvedSegment.LowerLeft) {
+            this.xt = function (t) {
+                return radius * (1 - Math.sin((t * Math.PI)/2));
+            };
+            this.yt = function (t) {
+                return radius * (1 - Math.cos((t * Math.PI)/2) - 1);
+            }
+        } else if (curve === CurvedSegment.LowerRight) {
+           this.xt = function (t) {
+                return radius * (Math.sin((t * Math.PI)/2) - 1);
+           };
+           this.yt = function (t) {
+                return radius * (1 - Math.cos((t * Math.PI)/2) - 1);
+           }
         }
     }
 }
