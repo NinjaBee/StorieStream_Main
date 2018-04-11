@@ -10,10 +10,14 @@ from django.shortcuts import render, HttpResponse, redirect
 def index(request):
     return HttpResponse('ok users')
 
-def update_profile(request, user_id):
-    user = User.objects.get(pk=user_id)
-    user.profile.bio = ''
-    user.save()
+
+# def update_profile(request, user_id):
+#     user = User.objects.get(pk=user_id)
+#     user.profile.bio = ''
+#     user.save()
+
+def profile(request):
+    return HttpResponse('ok profile')
 
 
 @login_required

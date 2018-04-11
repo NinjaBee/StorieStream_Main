@@ -266,8 +266,8 @@
             // Calling split text function to get our lines.
             let lines = splitText(text, width);
 
-            //lines = lines.splice(0, 80);
-            let text_scale_factor = 0.1;
+            lines = lines.splice(0, 80);
+            let text_scale_factor = 0.06;
 
             // Creating a new global coordinate called gc.
             let gc = new GlobalCoordinates(400, 400, lines.length * text_scale_factor);
@@ -336,7 +336,7 @@
                 // Might be pointless to have line_height
                 div.style.height = line_height + 'px';
                 // It is important that width be constant. When width is adustable by pixels this may not be needed.
-                div.style.width = '300px';   // DON'T LOSE THIS
+                div.style.width = '500px';   // DON'T LOSE THIS
                 // Add new div to our outter div "container"
                 container.appendChild(div);
 
@@ -436,7 +436,7 @@
 
     // In this iteration we are judging width on characters instead of pixels. Will go back to pixels later.
     let width = 30; // our width we use when making lines, etc.
-    let line_height = 30;
+    let line_height = 80;
     let container = document.querySelector('#container'); // This is the div we automatically populate that you can see in the html. We create more than one of these.
 
     let curved_segment = new CurvedSegment(500, CurvedSegment.UpperLeft);
@@ -484,8 +484,9 @@
 
     let current_t = 0.0;
     window.onwheel = function (evt) {
-        //current_t += 0.0001*evt.deltaY;
-        current_t += text_path.gc.scale * evt.deltaY / 100000;
+        current_t += 0.0001*evt.deltaY;
+        //current_t += text_path.gc.scale * evt.deltaY / 50000;
+        //current_t += evt.deltaY/text_path.gc.scale/1000;
         if (current_t < 0) {
             current_t = 0;
         } else if (current_t > 1.0) {
