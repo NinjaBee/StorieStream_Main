@@ -1,7 +1,12 @@
 from django.shortcuts import render, HttpResponse, get_object_or_404
 from .models import StorieBed, SavedFile
+from django.contrib.auth.decorators import login_required
+from django.db import transaction
 
 
+
+@login_required
+@transaction.atomic
 def index(request):
     if request.method == 'POST':
         storiebed = StorieBed()
@@ -11,7 +16,7 @@ def index(request):
         storiebed.text = text_file.read()
         storiebed.save()
 
-    return render(request, 'edits/index.html', {'text':'123mnfkjhfwe.khfghj,shufgksjdhf'})
+    return render(request, 'edits/index.html', {'text': 'fff' })
 
 
 

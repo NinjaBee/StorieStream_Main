@@ -6,16 +6,37 @@
 </head>
 <body>
 
-<div id="container"></div>
+<div id="segment_selection"></div>
 
-<form action="{% url 'edits:index' %}" method="POST" enctype="multipart/form-data">
-    <!-- ... -->
-    {% csrf_token %}
-    <input type="text" name="name">
-    <input type="file" name="text_file" accept="txt/*" required>
-    <button type="submit">submit</button>
-</form>
+<div id="center_panel">
+    <div id="container"></div>
+</div>
 
+<div id="upload_div">
+    <form action="{% url 'edits:index' %}" method="POST" enctype="multipart/form-data">
+        <!-- ... -->
+        {% csrf_token %}
+        <input type="text" name="name">
+        <input type="file" name="text_file" accept="txt/*" required>
+        <button type="submit">submit</button>
+    </form>
+</div>
+
+<div id="editing_panel">
+
+     <!--Do I need these buttons in a form? Best way to do that? -->
+    <button id="straight_segment_bt" value="straight_segment">Straight Segment </button>
+    <button id="upperLeft_segment_bt" value="upperLeft_segment">Upper Left Segment </button>
+    <button id="upperRight_segment_bt" value="upperRight_segment">Upper Right Segment </button>
+    <button id="lowerLeft_segment_bt" value="lowerLeft_segment">Lower Left Segment </button>
+    <button id="lowerRight_segment_bt" value="lowerRight_segment">Lower Right Segment </button>
+    <button id="sin_segment_bt" value="sin_segment">Sin Segment </button>
+
+</div>
+
+<button id="go_bt"> Go! </button>
+
+<script src="{% static 'JS/segments.js' %}"> </script>
 <script src="{% static 'JS/main.js' %}"> </script>
     <script>
         let text = `{{text}}`;

@@ -35,10 +35,10 @@ class StorieBed(models.Model):
 
 
     def currentProject(self):
-
         self.completed = False
-
 
 
     def __str__(self):
         return self.name
+
+#class
