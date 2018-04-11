@@ -2,14 +2,20 @@
 {% load static %}
 <head>
      <!--<link href="{% static 'CSS/path.css' %}" rel="stylesheet">-->
+    <script>
+        let storie_name = '{{ name }}';
+        let storie_text = '{{ text }}';
+    </script>
+
     <script src="{% static 'JS/path.js' %}"> </script>
+    <link href="{% static 'CSS/editPanel.css' %}" rel="stylesheet">
 </head>
 <body>
 
 <div id="segment_selection"></div>
 
 <div id="center_panel">
-    <div id="container"></div>
+    <textarea> {{ text }} </textarea>
 </div>
 
 <div id="upload_div">
@@ -23,21 +29,51 @@
 </div>
 
 <div id="editing_panel">
-
-     <!--Do I need these buttons in a form? Best way to do that? -->
-    <button id="straight_segment_bt" value="straight_segment">Straight Segment </button>
-    <button id="upperLeft_segment_bt" value="upperLeft_segment">Upper Left Segment </button>
-    <button id="upperRight_segment_bt" value="upperRight_segment">Upper Right Segment </button>
-    <button id="lowerLeft_segment_bt" value="lowerLeft_segment">Lower Left Segment </button>
-    <button id="lowerRight_segment_bt" value="lowerRight_segment">Lower Right Segment </button>
-    <button id="sin_segment_bt" value="sin_segment">Sin Segment </button>
-
+    <div id="buttons">
+         <!--Do I need these buttons in a form? Best way to do that? -->
+        <button id="straight_segment_bt" value="straight_segment">Straight Segment </button>
+        <button id="upperLeft_segment_bt" value="upperLeft_segment">Upper Left Segment </button>
+        <button id="upperRight_segment_bt" value="upperRight_segment">Upper Right Segment </button>
+        <button id="lowerLeft_segment_bt" value="lowerLeft_segment">Lower Left Segment </button>
+        <button id="lowerRight_segment_bt" value="lowerRight_segment">Lower Right Segment </button>
+        <button id="sin_segment_bt" value="sin_segment">Sin Segment </button>
+        <button id="clear_segments"> Clear All Segments </button>
+    </div>
+    <div id="sliders">
+        <table>
+            <tr>
+                <th>
+                 <label for="scale"> Scale (straight segment) </label>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                     <input type="range" min="50" max="500" value="250" class="slider" id="scale" onchange="">
+                </td>
+                <td>
+                    <span id="scaleOutput"> </span>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                 <label for="radius"> Radius (Curved segment) </label>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                     <input type="range" min="100" max="10000" value="450" class="slider" id="radius">
+                </td>
+                <td>
+                    <span id="radiusOutput"> </span>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
 
 <button id="go_bt"> Go! </button>
 
 <script src="{% static 'JS/main.js' %}"> </script>
-<script src="{% static 'JS/scroll.js' %}"> </script>
 
 </body>
 
