@@ -20,7 +20,6 @@ function splitText(text, width) {
 }
 
 
-
 // Segments are chunks of text in multiple divs that are curved (or not) according to mathematical equations.
 class Segment {
     constructor(xt, yt) {

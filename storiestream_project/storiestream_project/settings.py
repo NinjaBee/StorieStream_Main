@@ -152,3 +152,8 @@ CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 MEDIA_ROOT = os.path.join(CURRENT_DIR, 'uploaded_files')
 MEDIA_URL = '/uploaded_files/'
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    '/var/www/static/',
+]

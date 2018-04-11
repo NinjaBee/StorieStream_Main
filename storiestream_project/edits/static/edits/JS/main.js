@@ -1,10 +1,10 @@
-let straight_segment_bt = document.getElementById(straight_segment_bt);
-let upperLeft_segment_bt = document.getElementById(upperLeft_segment_bt);
-let upperRight_segment_bt = document.getElementById(upperRight_segment_bt);
-let lowerLeft_segment_bt = document.getElementById(lowerLeft_segment_bt);
-let lowerRight_segment_bt = document.getElementById(lowerRight_segment_bt);
-let sin_segment_bt = document.getElementById(sin_segment_bt);
-let go_bt = document.getElementById(go_bt);
+let straight_segment_bt = document.getElementById('straight_segment_bt');
+let upperLeft_segment_bt = document.getElementById('upperLeft_segment_bt');
+let upperRight_segment_bt = document.getElementById('upperRight_segment_bt');
+let lowerLeft_segment_bt = document.getElementById('lowerLeft_segment_bt');
+let lowerRight_segment_bt = document.getElementById('lowerRight_segment_bt');
+let sin_segment_bt = document.getElementById('sin_segment_bt');
+let go_bt = document.getElementById('go_bt');
 
 
 function getRandomInt(min, max) {
@@ -14,6 +14,7 @@ function getRandomInt(min, max) {
 }
 
 let segments = [];
+//let segment_id = 1
 //let text = { text };
 
 
@@ -21,10 +22,15 @@ let segments = [];
 
 /* Segment buttons. Currently these do not trigger images. Incrementing needs to happen instead of rand. num */
 straight_segment_bt.addEventListener("click", function(){
-    let straight_segment = new StraightSegment(Math.PI/4, 100);
-    let number = getRandomInt(1, 1000).toString();
-    segments.push(straight_segment + number);
+    segments.push(new StraightSegment(Math.PI/4, 100));
 });
+//
+// straight_segment_bt.addEventListener("click", function(){
+//     let straight_segment = new StraightSegment(Math.PI/4, 100);
+//     let number = getRandomInt(1, 1000).toString();
+//     segments.push((straight_segment, segment_id.toString()));
+//     segment_id++;
+// });
 
 upperLeft_segment_bt.addEventListener("click", function(){
     let upperLeft_segment = new CurvedSegment(400, CurvedSegment.UpperLeft);
@@ -71,5 +77,6 @@ go_bt.addEventListener("click", function(){
 
 ///// I WANT TO EITHER REDIRECT TO A NEW PAGE WHEN GO IS PUSHED OR APPLY THE TEXT PATH TO THE
 ////  CONTENTS OF THE CENTRAL PANEL AND BE ABLE TO SCROLL THROUGH
+//// == a simple test with res izing the container makes me think redirecting to a new page is best. ==
 
 

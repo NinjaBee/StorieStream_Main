@@ -1,7 +1,7 @@
 
 {% load static %}
 <head>
-    <link href="{% static 'CSS/path.css' %}" rel="stylesheet">
+     <!--<link href="{% static 'CSS/path.css' %}" rel="stylesheet">-->
     <script src="{% static 'JS/path.js' %}"> </script>
 </head>
 <body>
@@ -36,11 +36,9 @@
 
 <button id="go_bt"> Go! </button>
 
-<script src="{% static 'JS/segments.js' %}"> </script>
 <script src="{% static 'JS/main.js' %}"> </script>
-    <script>
-        let text = `{{text}}`;
-    </script>
+<script src="{% static 'JS/scroll.js' %}"> </script>
+
 </body>
 
 

@@ -1,5 +1,4 @@
 
-
 //// modified scroll function using t with (x,y) coordinates centered in text divs. /////
 
 let current_t = 0.0;
