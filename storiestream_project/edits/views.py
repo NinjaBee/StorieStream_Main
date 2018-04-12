@@ -3,7 +3,7 @@ from .models import StorieBed, SavedFile
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from .forms import StorieForm
-import codecs
+
 
 
 @login_required
@@ -13,7 +13,7 @@ def index(request):
         storiebed = StorieBed()
         storiebed.user = request.user
         storiebed.name = request.POST['name']
-        text_file = request.FILES['text_file'].open('utf-8')
+        text_file = request.FILES['text_file']
         storiebed.text = text_file.read()
         storiebed.save()
         return render(request, 'edits/index.html', {'text': storiebed.text, 'name': storiebed.name })
