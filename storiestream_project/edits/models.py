@@ -41,4 +41,7 @@ class StorieBed(models.Model):
     def __str__(self):
         return self.name
 
-#class
+
+class Project(models.Model):
+    '''  '''
+    segments = models.TextField(null=True, blank=True) # For the JSON to string segment blocks and vice versa
