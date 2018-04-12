@@ -12,26 +12,49 @@ body {
 
 }
 
+#upload_container{
+    display: flex;
+    flex-direction: row;
+}
+
 #center_panel {
-    width: 550px;
-    height: 81%;
+    width: 40%;
+    height: 100%;
 }
 
 #normaltext {
     align-content: left;
     justify-content: center;
     width: 500px;
-    height: 500px;
+    height: 80%;
     overflow: scroll;
-    border: 5px #80c6dd solid;
+    border: 4px #80c6dd solid;
     background-color: white;
     margin-right: 100px;
     margin-top: 100px;
 }
 
+#normaltext:active {
+   transform: rotate(45deg);
+   -webkit-transform: rotate(45deg);
+   -ms-transform: rotate(45deg);
+}
+
 #go_bt {
     height: 50px;
     width: 50px;
+    background-color: white;
+    border: 2px #80c6dd solid;
+    border-radius: 20%;
+    font-family: "Nanum Brush Script", "Times New Roman", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: larger;
+
+}
+#go_bt:hover {
+    background-color: mediumpurple;
+    color: white;
+    font-style: oblique;
+    /*font-size: 150%;*/
 }
 
 /*#go_bt_div {*/
@@ -39,6 +62,10 @@ body {
     /*align-content: baseline;*/
 /*}*/
 
+#center_plus_editing {
+    display: flex;
+    flex-direction: row;
+}
 
 #editing_panel {
     display: flex;
@@ -46,9 +73,10 @@ body {
     justify-content: space-around;
     background-color: #d2e1f8;
     width: 20%;
-    height: 81% ;
+    height: 80% ;
     margin: 30px;
     margin-top: 100px;
+    border: 2px #80c6dd solid;
 }
 
 .buttons {
@@ -76,6 +104,10 @@ body {
     padding-top: 1em;
     padding-bottom: 1em;
 }
+#straight_segment_bt:hover{
+    background-color: #6e64ff;
+}
+
 #upperLeft_segment_bt {
     height: 4em;
     width: 4em;
@@ -88,6 +120,10 @@ body {
     padding-bottom: 1em;
 
 }
+#upperLeft_segment_bt:hover {
+    background-color: #ed827f;
+}
+
 #upperRight_segment_bt {
     height: 4em;
     width: 4em;
@@ -99,6 +135,9 @@ body {
     padding-bottom: 1em;
 
 }
+#upperRight_segment_bt:hover {
+    background-color: #ffaf6a;
+}
 #lowerLeft_segment_bt{
     height: 4em;
     width: 4em;
@@ -108,8 +147,11 @@ body {
     background-position: center center;
     padding-top: 1em;
     padding-bottom: 1em;
-
 }
+#lowerLeft_segment_bt:hover{
+    background-color: #fffea1;
+}
+
 #lowerRight_segment_bt{
     height: 4em;
     width: 4em;
@@ -120,6 +162,9 @@ body {
     padding-top: 1em;
     padding-bottom: 1em;
 
+}
+#lowerRight_segment_bt:hover{
+    background-color: #71af6f;
 }
 #sin_segment_bt{
     height: 4em;
@@ -132,9 +177,18 @@ body {
     padding-bottom: 1em;
 
 }
+#sin_segment_bt:hover{
+    background-color: #a480e2;
+}
 #clear_segments{
     width: 8em;
     height: 1.5em;
+    color: slategray;
+}
+#clear_segments:hover {
+    background-color: hotpink;
+    color: white;
+    font-style: oblique;
 }
 
 

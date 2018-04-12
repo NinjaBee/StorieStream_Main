@@ -22,61 +22,65 @@
 <div id="selected_segments"> </div>
 
 <div id="container"> </div>
-<div id="upload_div">
-    <form action="{% url 'edits:index' %}" method="POST" enctype="multipart/form-data">
-        <!-- ... -->
-        {% csrf_token %}
-        <input type="text" name="name">
-        <input type="file" name="text_file" accept="txt/*" required>
-        <button type="submit">submit</button>
-    </form>
-</div>
 
-<div id="editing_panel">
-    <div id="buttons">
-         <!--Do I need these buttons in a form? Best way to do that? -->
-        <button id="upperLeft_segment_bt" class="button"  value="upperLeft_segment"> </button>
-        <button id="upperRight_segment_bt" class="button"  value="upperRight_segment"> </button>
-        <button id="lowerLeft_segment_bt" class="button"  value="lowerLeft_segment"> </button>
-        <button id="lowerRight_segment_bt" class="button"  value="lowerRight_segment"> </button>
-        <button id="straight_segment_bt" class="button" value="straight_segment"> </button>
-        <button id="sin_segment_bt" class="button"  value="sin_segment"> </button>
-        <button id="clear_segments" class="button" > Clear All</button>
-         <button id="go_bt" class="button" > Go! </button>
-    </div>
-    <div id="sliders">
-        <table>
-            <tr>
-                <th>
-                 <label class="sliderlabel" for="scale"> Scale (straight segment) </label>
-                </th>
-            </tr>
-            <tr>
-                <td>
-                     <input type="range" min="50" max="500" value="250" class="slider" id="scale" onchange="">
-                </td>
-                <td>
-                    <span id="scaleOutput"> </span>
-                </td>
-            </tr>
-            <tr>
-                <th>
-                 <label class="sliderlabel" for="radius"> Radius (Curved segment) </label>
-                </th>
-            </tr>
-            <tr>
-                <td>
-                     <input type="range" min="100" max="1500" value="450" class="slider" id="radius">
-                </td>
-                <td>
-                    <span id="radiusOutput"> </span>
-                </td>
-            </tr>
-        </table>
+<div id="upload_container">
+    <div id="upload_div">
+        <form action="{% url 'edits:index' %}" method="POST" enctype="multipart/form-data">
+            <!-- ... -->
+            {% csrf_token %}
+            <input type="text" name="name" required>
+            <input type="file" name="text_file" accept="txt/*" required>
+            <button type="submit">submit</button>
+        </form>
     </div>
 </div>
-<div id="center_panel">
-    <div id="normaltext">  {{ text }} </div>
+<div id="center_plus_editing">
+    <div id="editing_panel">
+        <div id="buttons">
+             <!--Do I need these buttons in a form? Best way to do that? -->
+            <button id="upperLeft_segment_bt" class="button"  value="upperLeft_segment"> </button>
+            <button id="upperRight_segment_bt" class="button"  value="upperRight_segment"> </button>
+            <button id="lowerLeft_segment_bt" class="button"  value="lowerLeft_segment"> </button>
+            <button id="lowerRight_segment_bt" class="button"  value="lowerRight_segment"> </button>
+            <button id="straight_segment_bt" class="button" value="straight_segment"> </button>
+            <button id="sin_segment_bt" class="button"  value="sin_segment"> </button>
+            <button id="clear_segments" class="button" > Clear All</button>
+             <button id="go_bt" class="button" > Go! </button>
+        </div>
+        <div id="sliders">
+            <table>
+                <tr>
+                    <th>
+                     <label class="sliderlabel" for="scale"> Scale (straight segment) </label>
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                         <input type="range" min="50" max="500" value="250" class="slider" id="scale" onchange="">
+                    </td>
+                    <td>
+                        <span id="scaleOutput"> </span>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                     <label class="sliderlabel" for="radius"> Radius (Curved segment) </label>
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                         <input type="range" min="100" max="1500" value="450" class="slider" id="radius">
+                    </td>
+                    <td>
+                        <span id="radiusOutput"> </span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="center_panel">
+        <div id="normaltext">  {{ text }} </div>
+    </div>
 </div>
 
 
