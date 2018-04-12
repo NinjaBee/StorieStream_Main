@@ -275,8 +275,8 @@ class TextPath {
             // It is important that width be constant. When width is adustable by pixels this may not be needed.
             div.style.width = '300px';   // DON'T LOSE THIS
             // Add new div to our outter div "container"
+            console.log(div)
             container.appendChild(div);
-
         }
         this.gc = new GlobalCoordinates(400, 400, lines.length * text_scale_factor);  ///////// hashed together recall of this.gc
 

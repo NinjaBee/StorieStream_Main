@@ -1,0 +1,190 @@
+
+
+body {
+    display: flex;
+    background-color: #cdf5bc;
+}
+
+#header_div {
+    display: flex;
+    flex-direction: column;
+
+
+}
+
+#center_panel {
+    width: 550px;
+    height: 81%;
+}
+
+#normaltext {
+    align-content: left;
+    justify-content: center;
+    width: 500px;
+    height: 500px;
+    overflow: scroll;
+    border: 5px #80c6dd solid;
+    background-color: white;
+    margin-right: 100px;
+    margin-top: 100px;
+}
+
+#go_bt {
+    height: 50px;
+    width: 50px;
+}
+
+/*#go_bt_div {*/
+    /*display: flex;*/
+    /*align-content: baseline;*/
+/*}*/
+
+
+#editing_panel {
+    display: flex;
+    align-content: right;
+    justify-content: space-around;
+    background-color: #d2e1f8;
+    width: 20%;
+    height: 81% ;
+    margin: 30px;
+    margin-top: 100px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+
+}
+
+.sliderlabel {
+    font-family: "Times New Roman", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: .8em;
+    opacity: 0.7;
+}
+
+#straight_segment_bt {
+    height: 4em;
+    width: 4em;
+    background-image: url("../images/button_icons/Icon-Vertical.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+#upperLeft_segment_bt {
+    height: 4em;
+    width: 4em;
+    -webkit-transform: rotate(180deg);
+    background-image: url("../images/button_icons/Icon-curveLowerRight.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    padding-top: 1em;
+    padding-bottom: 1em;
+
+}
+#upperRight_segment_bt {
+    height: 4em;
+    width: 4em;
+    background-image: url("../images/button_icons/Icon-curveUpperRight.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    padding-top: 1em;
+    padding-bottom: 1em;
+
+}
+#lowerLeft_segment_bt{
+    height: 4em;
+    width: 4em;
+    background-image: url("../images/button_icons/Icon-curveLowerLeft.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    padding-top: 1em;
+    padding-bottom: 1em;
+
+}
+#lowerRight_segment_bt{
+    height: 4em;
+    width: 4em;
+    background-image: url("../images/button_icons/Icon-curveLowerRight.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    padding-top: 1em;
+    padding-bottom: 1em;
+
+}
+#sin_segment_bt{
+    height: 4em;
+    width: 4em;
+    background-image: url("../images/button_icons/Icon-SinCurve.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    padding-top: 1em;
+    padding-bottom: 1em;
+
+}
+#clear_segments{
+    width: 8em;
+    height: 1.5em;
+}
+
+
+
+
+#upload_div {
+    display: flex;
+    width: 100px;
+    height: 50px;
+}
+
+
+.slidecontainer {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%; /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 100%; /* Full-width */
+    height: 4px; /* Specified height */
+    background: #8372da; /* Grey background */
+    outline: none; /* Remove outline */
+    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 6px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: #80c6dd; /* Green background */
+    cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+    width: 6px; /* Set a specific slider handle width */
+    height: 25px; /* Slider handle height */
+    background: #80c6dd; /* Green background */
+    cursor: grabbing /* Cursor on hover */
+}
+

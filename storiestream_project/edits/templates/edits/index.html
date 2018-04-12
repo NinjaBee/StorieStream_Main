@@ -4,20 +4,24 @@
      <!--<link href="{% static 'CSS/path.css' %}" rel="stylesheet">-->
     <script>
         let storie_name = '{{ name }}';
-        let storie_text = '{{ text }}';
+        let storie_text = '{{ text }}'.toString();
     </script>
 
     <script src="{% static 'JS/path.js' %}"> </script>
     <link href="{% static 'CSS/editPanel.css' %}" rel="stylesheet">
+    <!--<link rel="stylesheet" href="https://unpkg.com/mobi-plugin-flexbox/dist/mobi-plugin-flexbox.min.css" />-->
+
 </head>
 <body>
+<!--<div id="header_div">-->
+<!--<h1 id="header">Make a path</h1>-->
+<!--<blockquote> Select segments to add to your StorieStream path then press "Go!"</blockquote>-->
+<!--</div>-->
 
-<div id="segment_selection"></div>
+<!-- Set up area to display selected segments-->
+<div id="selected_segments"> </div>
 
-<div id="center_panel">
-    <textarea> {{ text }} </textarea>
-</div>
-
+<div id="container"> </div>
 <div id="upload_div">
     <form action="{% url 'edits:index' %}" method="POST" enctype="multipart/form-data">
         <!-- ... -->
@@ -31,19 +35,20 @@
 <div id="editing_panel">
     <div id="buttons">
          <!--Do I need these buttons in a form? Best way to do that? -->
-        <button id="straight_segment_bt" value="straight_segment">Straight Segment </button>
-        <button id="upperLeft_segment_bt" value="upperLeft_segment">Upper Left Segment </button>
-        <button id="upperRight_segment_bt" value="upperRight_segment">Upper Right Segment </button>
-        <button id="lowerLeft_segment_bt" value="lowerLeft_segment">Lower Left Segment </button>
-        <button id="lowerRight_segment_bt" value="lowerRight_segment">Lower Right Segment </button>
-        <button id="sin_segment_bt" value="sin_segment">Sin Segment </button>
-        <button id="clear_segments"> Clear All Segments </button>
+        <button id="upperLeft_segment_bt" class="button"  value="upperLeft_segment"> </button>
+        <button id="upperRight_segment_bt" class="button"  value="upperRight_segment"> </button>
+        <button id="lowerLeft_segment_bt" class="button"  value="lowerLeft_segment"> </button>
+        <button id="lowerRight_segment_bt" class="button"  value="lowerRight_segment"> </button>
+        <button id="straight_segment_bt" class="button" value="straight_segment"> </button>
+        <button id="sin_segment_bt" class="button"  value="sin_segment"> </button>
+        <button id="clear_segments" class="button" > Clear All</button>
+         <button id="go_bt" class="button" > Go! </button>
     </div>
     <div id="sliders">
         <table>
             <tr>
                 <th>
-                 <label for="scale"> Scale (straight segment) </label>
+                 <label class="sliderlabel" for="scale"> Scale (straight segment) </label>
                 </th>
             </tr>
             <tr>
@@ -56,12 +61,12 @@
             </tr>
             <tr>
                 <th>
-                 <label for="radius"> Radius (Curved segment) </label>
+                 <label class="sliderlabel" for="radius"> Radius (Curved segment) </label>
                 </th>
             </tr>
             <tr>
                 <td>
-                     <input type="range" min="100" max="10000" value="450" class="slider" id="radius">
+                     <input type="range" min="100" max="1500" value="450" class="slider" id="radius">
                 </td>
                 <td>
                     <span id="radiusOutput"> </span>
@@ -70,8 +75,11 @@
         </table>
     </div>
 </div>
+<div id="center_panel">
+    <div id="normaltext">  {{ text }} </div>
+</div>
 
-<button id="go_bt"> Go! </button>
+
 
 <script src="{% static 'JS/main.js' %}"> </script>
 

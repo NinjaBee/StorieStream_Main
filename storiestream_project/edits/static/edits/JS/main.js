@@ -14,52 +14,51 @@ function getRandomInt(min, max) {
 }
 
 let segments = [];
-//let segment_id = 1
-//let text = { text };
 
+// set radius values for curved segments
+let radius = document.getElementById('radius').value;  // get radius value for curved segments
+let radiusOutput = document.getElementById('radiusOutput');
+radiusOutput.innerHTML = slider.value; // Display the default slider value
+radius.oninput = function() {
+    radius = this.value; // Change value of radius oninput
+    radiusOutput.innerHTML = this.value;  // show the value in html
+};
+
+// set scale value for straight segment
+let scale = document.getElementById('scale').value;
+let scaleOutput = document.getElementById('scaleOutput');
+scaleOutput.innerHTML = slider.value; // Display the default slider value
+scale.oninput = function(){
+    scale = this.value;
+    scaleOutput.innerHTML = this.value;
+};
 
 //// Adding event listeners to buttons to add segment chunks to the segments array. ////
 
 /* Segment buttons. Currently these do not trigger images. Incrementing needs to happen instead of rand. num */
 straight_segment_bt.addEventListener("click", function(){
-    segments.push(new StraightSegment(Math.PI/4, 100));
+    let angle = 0;
+    segments.push(new StraightSegment(angle, scale));
 });
-//
-// straight_segment_bt.addEventListener("click", function(){
-//     let straight_segment = new StraightSegment(Math.PI/4, 100);
-//     let number = getRandomInt(1, 1000).toString();
-//     segments.push((straight_segment, segment_id.toString()));
-//     segment_id++;
-// });
 
 upperLeft_segment_bt.addEventListener("click", function(){
-    let upperLeft_segment = new CurvedSegment(400, CurvedSegment.UpperLeft);
-    let number = getRandomInt(1, 1000).toString();
-    segments.push(upperLeft_segment + number);
+    segments.push(new CurvedSegment(radius, CurvedSegment.UpperLeft));
 });
 
 upperRight_segment_bt.addEventListener("click", function(){
-    let upperRight_segment = new CurvedSegment(400, CurvedSegment.UpperRight);
-    let number = getRandomInt(1, 1000).toString();
-    segments.push(upperRight_segment + number);
+    segments.push(new CurvedSegment(radius, CurvedSegment.UpperRight));
 });
 
 lowerLeft_segment_bt.addEventListener("click", function(){
-    let lowerLeft_segment = new CurvedSegment(400, CurvedSegment.LowerLeft);
-    let number = getRandomInt(1, 1000).toString();
-    segments.push(lowerLeft_segment + number);
+    segments.push( new CurvedSegment(radius, CurvedSegment.LowerLeft));
 });
 
 lowerRight_segment_bt.addEventListener("click", function(){
-    let lowerRight_segment = new CurvedSegment(400, CurvedSegment.LowerRight);
-    let number = getRandomInt(1, 1000).toString();
-    segments.push(lowerRight_segment + number);
+    segments.push(new CurvedSegment(radius, CurvedSegment.LowerRight));
 });
 
 sin_segment_bt.addEventListener("click", function(){
-    let sin_segment = new SinSegment();
-    let number = getRandomInt(1, 1000).toString();
-    segments.push(sin_segment + number);
+    segments.push(new SinSegment());
 });
 
 

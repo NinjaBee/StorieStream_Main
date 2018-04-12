@@ -439,14 +439,13 @@
     let line_height = 80;
     let container = document.querySelector('#container'); // This is the div we automatically populate that you can see in the html. We create more than one of these.
 
-    let curved_segment = new CurvedSegment(500, CurvedSegment.UpperLeft);
-    let curved_segment2 = new CurvedSegment(300, CurvedSegment.LowerRight);
-    let straight_segment1 = new StraightSegment(Math.PI/4, 100);
-    let straight_segment2 = new StraightSegment(Math.PI/4, 100);
-    let segments = [straight_segment1, curved_segment, straight_segment2, curved_segment2];
+    // let curved_segment = new CurvedSegment(500, CurvedSegment.UpperLeft);
+    // let curved_segment2 = new CurvedSegment(300, CurvedSegment.LowerRight);
+    // let straight_segment1 = new StraightSegment(Math.PI/4, 100);
+    // let straight_segment2 = new StraightSegment(Math.PI/4, 100);
+    let segments = [new StraightSegment(Math.PI/4, 100), new CurvedSegment(400, CurvedSegment.UpperLeft), new StraightSegment(Math.PI/6, 100)];
 
     let text_path = new TextPath(text, container, segments);
-
 
     // function findSegment(t) {
     //   for (let i=0; i<segments.length; ++i) {
